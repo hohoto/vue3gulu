@@ -1,5 +1,5 @@
 <template>
     <div>
-        second
+        Switch Demo
     </div>
 </template>
