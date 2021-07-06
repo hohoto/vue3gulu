@@ -36,7 +36,7 @@ export default {
       return {
         [`gulu-theme-${theme}`]: theme,
         [`gulu-size-${size}`]: size,
-        [`gulu-size-${level}`]: level,
+        [`gulu-level-${level}`]: level,
       };
     });
     return { classes };
