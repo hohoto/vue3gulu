@@ -36,18 +36,18 @@ export default {
     const selectedItem = ref<HTMLDivElement>(null);
     const indicator = ref<HTMLDivElement>(null);
     const container = ref<HTMLDivElement>(null);
+
     onMounted(() => {
       watchEffect(() => {
         const { width } = selectedItem.value.getBoundingClientRect();
         indicator.value.style.width = width + "px";
         const { left: left1 } = container.value.getBoundingClientRect();
         const { left: left2 } = selectedItem.value.getBoundingClientRect();
-        console.log("left1", left1);
-        console.log("left2", left2);
         const left = left2 - left1;
         indicator.value.style.left = left + "px";
       });
     });
+
     const defaults = context.slots.default();
     defaults.forEach((tag) => {
       if (tag.type !== Tab) {
@@ -55,12 +55,18 @@ export default {
       }
     });
     const current = computed(() => {
-      return defaults.find((tag) => tag.props.title === props.selected);
+      return defaults.find((tag) => {
+        console.log("tag", tag);
+        console.log("props", props);
+        console.log("defaults", defaults);
+        return tag.props.title === props.selected;
+      });
     });
     const titles = defaults.map((tag) => {
       return tag.props.title;
     });
     const select = (title: string) => {
+      console.log("title", title);
       context.emit("update:selected", title);
     };
     return {
@@ -80,23 +86,28 @@ export default {
 $blue: #40a9ff;
 $color: #333;
 $border-color: #d9d9d9;
+
 .gulu-tabs {
   &-nav {
     display: flex;
     color: $color;
     border-bottom: 1px solid $border-color;
     position: relative;
+
     &-item {
       padding: 8px 0;
       margin: 0 16px;
       cursor: pointer;
+
       &:first-child {
         margin-left: 0;
       }
+
       &.selected {
         color: $blue;
       }
     }
+
     &-indicator {
       position: absolute;
       height: 3px;
@@ -107,6 +118,7 @@ $border-color: #d9d9d9;
       transition: all 250ms;
     }
   }
+
   &-content {
     padding: 8px 0;
   }

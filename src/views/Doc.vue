@@ -1,40 +1,43 @@
 <template>
-    <div class="layout">
-        <Nav />
-        <div class="content">
-            <aside v-if="menuVisible">
-                <h2>组件列表</h2>
-                <ol>
-                <li>
-                    <router-link to="/doc/switch">Switch 组件</router-link>
-                </li>
-                <li>
-                    <router-link to="/doc/button">Button 组件</router-link>
-                </li>
-                <li>
-                    <router-link to="/doc/dialog">Dialog 组件</router-link>
-                </li>
-                <li>
-                    <router-link to="/doc/tabs">Tabs 组件</router-link>
-                </li>
-                </ol>
-            </aside>
-            <main>
-              <router-view />
-            </main>
-        </div>
+  <div class="layout">
+    <Nav />
+    <div class="content">
+      <aside v-if="menuVisible">
+        <h2>组件列表</h2>
+        <ol>
+          <li>
+            <router-link to="/doc/switch">Switch 组件</router-link>
+          </li>
+          <li>
+            <router-link to="/doc/button">Button 组件</router-link>
+          </li>
+          <li>
+            <router-link to="/doc/dialog">Dialog 组件</router-link>
+          </li>
+          <li>
+            <router-link to="/doc/tabs">Tabs 组件</router-link>
+          </li>
+          <li>
+            <router-link to="/doc/icons">Icons 库</router-link>
+          </li>
+        </ol>
+      </aside>
+      <main>
+        <router-view />
+      </main>
     </div>
+  </div>
 </template>
 <script lang="ts">
-import Nav from "./Nav.vue"
-import { inject, Ref } from 'vue'
+import Nav from "./Nav.vue";
+import { inject, Ref } from "vue";
 export default {
-    components:{Nav},
-    setup() {
-    const menuVisible = inject<Ref<boolean>>('menuVisible')
-    return {menuVisible}
-  }
-}
+  components: { Nav },
+  setup() {
+    const menuVisible = inject<Ref<boolean>>("menuVisible");
+    return { menuVisible };
+  },
+};
 </script>
 <style lang="scss" scoped>
 .layout {
@@ -49,7 +52,7 @@ export default {
     padding-top: 60px;
     padding-left: 156px;
     @media (max-width: 500px) {
-      padding-left: 0; 
+      padding-left: 0;
     }
   }
 }
