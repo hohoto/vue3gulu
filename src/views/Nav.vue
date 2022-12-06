@@ -1,6 +1,9 @@
 <template>
   <div class="topnav">
-    <div class="logo">LOGO</div>
+    <div class="logo">
+      <p>Bocchi UI</p>
+      <img src="../assets/images/BocchiDW.jpg" alt="" />
+    </div>
     <ul class="menu">
       <li><router-link to="/">Index</router-link></li>
       <li><router-link to="/doc">Docs</router-link></li>
@@ -9,30 +12,39 @@
   </div>
 </template>
 <script lang="ts">
-import { inject, Ref } from 'vue'
+import { inject, Ref } from "vue";
 export default {
   setup() {
-    const menuVisible = inject<Ref<boolean>>('menuVisible')
-    const toggleMenu = ()=>{
-      menuVisible.value = !menuVisible.value
-    }
-    return {toggleMenu}
-  }
-}
+    const menuVisible = inject<Ref<boolean>>("menuVisible");
+    const toggleMenu = () => {
+      menuVisible.value = !menuVisible.value;
+    };
+    return { toggleMenu };
+  },
+};
 </script>
 <style lang="scss" scoped>
 .topnav {
-  background: pink;
+  background: white;
+  color: black;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 24px;
   display: flex;
-  padding: 16px;
+  padding: 0 32px;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 10;
+  border-bottom: 0.5px solid rgba(60, 60, 60, 0.12);
   > .logo {
-    max-width: 6em;
     margin-right: auto;
+    display: flex;
+    img {
+      height: 24px;
+      padding: 0 5px;
+    }
   }
   > .menu {
     display: flex;
