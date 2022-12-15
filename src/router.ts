@@ -6,7 +6,7 @@ import DialogDemo from './components/DialogDemo.vue'
 import TabsDemo from './components/TabsDemo.vue'
 import DocDemo from './components/DocDemo.vue'
 import IconsDemo from './components/IconsDemo.vue'
-import FingerBoardDemo from './components/FingerBoard.vue'
+import FingerBoardDemo from './components/FingerBoardDemo.vue'
 import {createWebHashHistory, createRouter} from 'vue-router'
 
 const history = createWebHashHistory()

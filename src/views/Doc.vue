@@ -97,4 +97,7 @@ aside {
 main {
   overflow: auto;
 }
+.router-link-active {
+  color: #73c0ff;
+}
 </style>
