@@ -3,7 +3,7 @@
   <Strings
     v-for="curString in Instrument.strings"
     :key="curString"
-    :string-no="Instrument.strings + 1 - curString"
+    :string-no="curString"
     :frets="Instrument.frets"
   />
 </template>
