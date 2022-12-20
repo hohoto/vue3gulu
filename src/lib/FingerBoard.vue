@@ -1,5 +1,6 @@
 <template>
   <div class="Instrument_title">{{ Instrument.name }}</div>
+  <div class="Scale_title">{{ ScaleProps?.key + " " + ScaleProps?.name }}</div>
   <Strings
     v-for="curString in Instrument.strings"
     :key="curString"
@@ -9,6 +10,7 @@
 </template>
 <script lang="ts">
 import Strings from "./Strings.vue";
+import { Scale } from "./scale";
 class Instrument {
   name: String;
   strings: number;
@@ -28,12 +30,24 @@ export default {
         return new Instrument("Guitar", 6, 20);
       },
     },
+    ScaleProps: {
+      type: Scale,
+      default: () => {
+        return new Scale("C", "Major");
+      },
+    },
   },
-  setup() {},
+  setup() {
+    console.log("scale ", new Scale("C", "Major").getScaleNotes());
+    return {};
+  },
 };
 </script>
 <style lang="scss">
 .Instrument_title {
+  padding-bottom: 20px;
+}
+.Scale_title {
   padding-bottom: 20px;
 }
 </style>
