@@ -1,5 +1,10 @@
 <template>
   <div class="strings" :class="'strings' + stringNo">
+    <span class="openNote">
+      <span class="note">
+        {{ openNote }}
+      </span>
+    </span>
     <span
       v-for="curFret in frets"
       :key="curFret"
@@ -12,15 +17,32 @@
         :class="'dotFret' + curFret"
         ><span class="dot"> </span
       ></span>
+      <span v-if="confirmScaleNote(openNote, curFret)" class="noteFret"
+        ><span class="note">{{ getScaleNote(openNote, curFret) }} </span></span
+      >
     </span>
   </div>
 </template>
 
 <script lang="ts">
+import { AllNotes } from "./scaleLib";
 export default {
   props: {
     stringNo: Number,
     frets: Number,
+    openNote: {
+      type: String,
+      default: () => {
+        return "E";
+      },
+    },
+    isSharp: Boolean,
+    scaleNotes: {
+      type: Array,
+      default: () => {
+        return [];
+      },
+    },
     dotFrets: {
       type: Array,
       default: () => {
@@ -29,14 +51,41 @@ export default {
     },
   },
   setup(props, context) {
-    //   const toggle = ()=>{
-    //     context.emit('update:value',!props.value)
-    //   }
-    //   return {toggle}
+    const confirmScaleNote = (openNote: string, fret: number) => {
+      const curNotes = AllNotes[props.isSharp ? "#Notes" : "bNotes"];
+      const notesLength = curNotes.length;
+      const curNote =
+        curNotes[
+          (curNotes.indexOf(openNote) + fret + notesLength) % notesLength
+        ];
+
+      return props.scaleNotes.indexOf(curNote) >= 0;
+    };
+    const getScaleNote = (openNote: string, fret: number) => {
+      const curNotes = AllNotes[props.isSharp ? "#Notes" : "bNotes"];
+      const notesLength = curNotes.length;
+      const curNote =
+        curNotes[
+          (curNotes.indexOf(openNote) + fret + notesLength) % notesLength
+        ];
+
+      return curNote;
+    };
+    return {
+      confirmScaleNote,
+      getScaleNote,
+    };
   },
 };
 </script>
 <style lang="scss">
+$fretHeight: 25px;
+$fretWidth: 28px;
+$dotHeight: 13px;
+$dotWidth: 13px;
+$noteHeight: 15px;
+$noteWidth: 15px;
+
 .strings {
   height: 25px;
   border-top: solid 3px #888;
@@ -45,24 +94,58 @@ export default {
   justify-content: flex-end;
   align-items: center;
   .fret {
-    height: 25px;
-    width: 28px;
+    height: $fretHeight;
+    width: $fretWidth;
     border-right: solid 1px #888;
     display: flex;
+    position: relative;
     .dotFret {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 27px;
+      position: absolute;
+      left: ($fretWidth - $dotWidth)/2;
+      top: ($fretHeight - $dotHeight)/2;
       .dot {
         background-color: #888;
         border-radius: 13px;
-        width: 13px;
-        height: 13px;
+        width: $dotWidth;
+        height: $dotHeight;
       }
     }
     &.fret1 {
       border-left: solid 2px #888;
+    }
+    .noteFret {
+      display: flex;
+      margin: -0.5rem auto;
+      z-index: 1;
+      .note {
+        width: $noteWidth;
+        height: $noteHeight;
+        display: flex;
+        border-radius: 13px;
+        background-color: #666;
+        color: white;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+  .openNote {
+    display: flex;
+    margin-top: -$fretHeight;
+    justify-content: center;
+    z-index: 1;
+    .note {
+      width: $noteWidth;
+      height: $noteHeight;
+      display: flex;
+      border-radius: 13px;
+      background-color: #666;
+      color: white;
+      justify-content: center;
+      align-items: center;
     }
   }
   &.strings6 {

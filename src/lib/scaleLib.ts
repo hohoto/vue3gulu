@@ -6,4 +6,6 @@ export const AllNotes = {
     'bNotes': ['C','bD','D','bE','E','F','bG','G','bA','A','bB','B']
   };  
 //使用升号音符的调
-export const SharpKeys = ["C"]
+export const SharpKeys = {
+  "Major":["C","G","D","A","E","B","#F","#C"]
+}

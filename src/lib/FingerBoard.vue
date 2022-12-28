@@ -1,45 +1,46 @@
 <template>
-  <div class="Instrument_title">{{ Instrument.name }}</div>
-  <div class="Scale_title">{{ ScaleProps?.key + " " + ScaleProps?.name }}</div>
+  <div class="Instrument_title">{{ instrument.name }}</div>
+  <div class="Scale_title">{{ scaleProps?.key + " " + scaleProps?.name }}</div>
   <Strings
-    v-for="curString in Instrument.strings"
+    v-for="curString in instrument.strings"
     :key="curString"
     :string-no="curString"
-    :frets="Instrument.frets"
+    :frets="instrument.frets"
+    :open-note="instrument.openNotes[curString - 1]"
+    :is-sharp="scaleProps.isSharp"
+    :scale-notes="getScaleNotes()"
   />
 </template>
 <script lang="ts">
 import Strings from "./Strings.vue";
 import { Scale } from "./scale";
-class Instrument {
-  name: String;
-  strings: number;
-  frets: number;
-  constructor(name: String, strings: number, frets: number) {
-    this.name = name;
-    this.strings = strings;
-    this.frets = frets;
-  }
-}
+import { Instrument } from "./instrument";
 export default {
   components: { Strings },
   props: {
-    Instrument: {
+    instrument: {
       type: Instrument,
       default: () => {
-        return new Instrument("Guitar", 6, 20);
+        return new Instrument("Guitar", 6, 20, ["E", "B", "G", "D", "A", "E"]);
       },
     },
-    ScaleProps: {
+    scaleProps: {
       type: Scale,
       default: () => {
         return new Scale("C", "Major");
       },
     },
   },
-  setup() {
-    console.log("scale ", new Scale("C", "Major").getScaleNotes());
-    return {};
+  method: {
+    getScaleNotes: () => {
+      return true;
+    },
+  },
+  setup(props) {
+    const getScaleNotes = () => {
+      return props.scaleProps.getScaleNotes();
+    };
+    return { getScaleNotes };
   },
 };
 </script>
