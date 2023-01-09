@@ -27,7 +27,7 @@ export default {
     scaleProps: {
       type: Scale,
       default: () => {
-        return new Scale("C", "Major");
+        return new Scale("F", "Major");
       },
     },
   },
