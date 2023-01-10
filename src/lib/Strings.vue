@@ -1,8 +1,10 @@
 <template>
   <div class="strings" :class="'strings' + stringNo">
-    <span class="openNote">
-      <span class="note">
-        {{ openNote }}
+    <span class="fret">
+      <span class="noteFret fret0">
+        <span class="note">
+          {{ openNote }}
+        </span>
       </span>
     </span>
     <span
@@ -88,14 +90,15 @@ $noteWidth: 15px;
 
 .strings {
   height: 25px;
-  border-top: solid 3px #888;
   background-color: white;
   display: flex;
-  justify-content: flex-end;
+  justify-content: start;
   align-items: center;
+  min-width: 800px;
   .fret {
     height: $fretHeight;
-    width: $fretWidth;
+    border-top: solid 3px #888;
+    flex-basis: $fretWidth;
     border-right: solid 1px #888;
     display: flex;
     position: relative;
@@ -132,25 +135,10 @@ $noteWidth: 15px;
       }
     }
   }
-  .openNote {
-    display: flex;
-    margin-top: -$fretHeight;
-    justify-content: center;
-    z-index: 1;
-    .note {
-      width: $noteWidth;
-      height: $noteHeight;
-      display: flex;
-      border-radius: 13px;
-      background-color: #666;
-      color: white;
-      justify-content: center;
-      align-items: center;
-    }
-  }
   &.strings6 {
     .fret {
-      border: none;
+      border-left: none;
+      border-right: none;
     }
   }
 }
