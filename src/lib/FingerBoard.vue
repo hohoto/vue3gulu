@@ -6,7 +6,9 @@
     :key="curString"
     :string-no="curString"
     :frets="instrument.frets"
+    :is-last-string="!!(curString === instrument.strings)"
     :open-note="instrument.openNotes[curString - 1]"
+    :dot-string="Math.ceil(instrument.strings / 2)"
     :is-sharp="scaleProps.isSharp"
     :scale-notes="getScaleNotes()"
   />

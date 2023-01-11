@@ -1,8 +1,14 @@
 <template>
-  <div class="strings" :class="'strings' + stringNo">
+  <div
+    class="strings"
+    :class="['strings' + stringNo, isLastString ? 'last_string' : '']"
+  >
     <span class="fret">
       <span class="noteFret fret0">
-        <span class="note">
+        <span
+          class="note"
+          :class="confirmScaleNote(openNote, 0) ? '' : 'not_current_scale'"
+        >
           {{ openNote }}
         </span>
       </span>
@@ -14,7 +20,7 @@
       :class="'fret' + curFret"
     >
       <span
-        v-if="dotFrets.indexOf(curFret) >= 0 && stringNo === 3"
+        v-if="dotFrets.indexOf(curFret) >= 0 && stringNo === dotString"
         class="dotFret"
         :class="'dotFret' + curFret"
         ><span class="dot"> </span
@@ -32,6 +38,7 @@ export default {
   props: {
     stringNo: Number,
     frets: Number,
+    isLastString: Boolean,
     openNote: {
       type: String,
       default: () => {
@@ -49,6 +56,12 @@ export default {
       type: Array,
       default: () => {
         return [3, 5, 7, 9, 12, 15, 17, 19];
+      },
+    },
+    dotString: {
+      type: Number,
+      default: () => {
+        return 3;
       },
     },
   },
@@ -132,10 +145,13 @@ $noteWidth: 15px;
         color: white;
         justify-content: center;
         align-items: center;
+        &.not_current_scale {
+          opacity: 0.4;
+        }
       }
     }
   }
-  &.strings6 {
+  &.last_string {
     .fret {
       border-left: none;
       border-right: none;
