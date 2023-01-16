@@ -148,6 +148,9 @@ $noteWidth: 15px;
         &.not_current_scale {
           opacity: 0.4;
         }
+        &:hover {
+          box-shadow: 0px 0px 3px #333;
+        }
       }
     }
   }
