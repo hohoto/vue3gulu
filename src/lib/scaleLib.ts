@@ -5,7 +5,7 @@ export const AllNotes = {
     '#Notes': ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],
     'bNotes': ['C','bD','D','bE','E','F','bG','G','bA','A','bB','B']
   };  
-//使用升号音符的调
+//keys which use sharp Note
 export const SharpKeys = {
   "Major":["C","G","D","A","E","B","F#","C#"]
 }

@@ -1,18 +1,23 @@
 <template>
-  <div class="Instrument_title">{{ instrument.name }}</div>
-  <div class="Scale_title">{{ scaleProps?.key + " " + scaleProps?.name }}</div>
-  <Strings
-    v-for="curString in instrument.strings"
-    :key="curString"
-    :string-no="curString"
-    :frets="instrument.frets"
-    :is-last-string="!!(curString === instrument.strings)"
-    :open-note="instrument.openNotes[curString - 1]"
-    :dot-string="Math.ceil(instrument.strings / 2)"
-    :is-sharp="scaleProps.isSharp"
-    :scale-notes="getScaleNotes()"
-    :highlight-note="highlightNote"
-  />
+  <div>
+    <div class="Instrument_title">{{ instrument.name }}</div>
+    <div class="Scale_title">
+      {{ scaleProps?.key + " " + scaleProps?.name }}
+    </div>
+    <Strings
+      v-for="curString in instrument.strings"
+      :key="curString"
+      :string-no="curString"
+      :frets="instrument.frets"
+      :is-last-string="!!(curString === instrument.strings)"
+      :open-note="instrument.openNotes[curString - 1]"
+      :dot-string="Math.ceil(instrument.strings / 2)"
+      :is-sharp="scaleProps.isSharp"
+      :scale-notes="getScaleNotes()"
+      :highlight-note="highlightNoteLevel"
+      :dot-frets="dotFrets"
+    />
+  </div>
 </template>
 <script lang="ts">
 import Strings from "./Strings.vue";
@@ -33,10 +38,16 @@ export default {
         return new Scale("C", "Major");
       },
     },
-    highlightNote: {
+    highlightNoteLevel: {
       type: Number,
       default: () => {
         return 1;
+      },
+    },
+    dotFrets: {
+      type: Array,
+      default: () => {
+        return [3, 5, 7, 9, 12, 15, 17, 19];
       },
     },
   },

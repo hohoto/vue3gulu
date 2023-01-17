@@ -1,7 +1,7 @@
 <template>
   <div class="topnav">
     <div class="logo">
-      <p>Bocchi UI</p>
+      <p>Band Hero Lib</p>
       <img src="../assets/images/BocchiDW.jpg" alt="" />
     </div>
     <ul class="menu">

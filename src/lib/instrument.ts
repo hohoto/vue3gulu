@@ -9,4 +9,10 @@ export class Instrument {
       this.frets = frets;
       this.openNotes = openNotes;
     }
+    setName(name: string) {
+      this.name = name 
+    }
+    setStrings(strings: number) {
+      this.strings = strings 
+    }
   }

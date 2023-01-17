@@ -2,8 +2,8 @@
   <div>
     <Nav />
     <div class="banner">
-      <h1>Bocchi UI</h1>
-      <h2>UI frame</h2>
+      <h1>Band Hero Lib</h1>
+      <h2>Component Lib</h2>
       <p class="actions">
         <a href="">Github</a>
         <router-link to="/doc">Start</router-link>

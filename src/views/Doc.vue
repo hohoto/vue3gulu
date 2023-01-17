@@ -3,25 +3,25 @@
     <Nav />
     <div class="content">
       <aside v-if="menuVisible">
-        <p>组件列表</p>
+        <p>Component List</p>
         <ol>
-          <li>
-            <router-link to="/doc/switch">Switch 组件</router-link>
+          <!-- temporarily no use<li>
+            <router-link to="/doc/switch">Switch</router-link>
           </li>
           <li>
-            <router-link to="/doc/button">Button 组件</router-link>
+            <router-link to="/doc/button">Button</router-link>
           </li>
           <li>
-            <router-link to="/doc/dialog">Dialog 组件</router-link>
+            <router-link to="/doc/dialog">Dialog</router-link>
           </li>
           <li>
-            <router-link to="/doc/tabs">Tabs 组件</router-link>
+            <router-link to="/doc/tabs">Tabs</router-link>
+          </li> -->
+          <li>
+            <router-link to="/doc/fingerBoard">FingerBoard</router-link>
           </li>
           <li>
-            <router-link to="/doc/fingerBoard">FingerBoard 组件</router-link>
-          </li>
-          <li>
-            <router-link to="/doc/icons">Icons 库</router-link>
+            <router-link to="/doc/icons">Icons lib</router-link>
           </li>
         </ol>
       </aside>

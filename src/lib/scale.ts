@@ -20,7 +20,7 @@ export class Scale {
         return flatNotes.filter(x=>this.degree.indexOf(flatNotes.indexOf(x))>=0)
       }
     }
-    alterRootNote(key,notesArray){
+    alterRootNote(key: string,notesArray: any[]){
       const keyIndex = notesArray.indexOf(key)
       if (keyIndex<0) {
         return notesArray
