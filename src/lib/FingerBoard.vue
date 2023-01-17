@@ -11,6 +11,7 @@
     :dot-string="Math.ceil(instrument.strings / 2)"
     :is-sharp="scaleProps.isSharp"
     :scale-notes="getScaleNotes()"
+    :highlight-note="highlightNote"
   />
 </template>
 <script lang="ts">
@@ -29,7 +30,13 @@ export default {
     scaleProps: {
       type: Scale,
       default: () => {
-        return new Scale("F", "Major");
+        return new Scale("C", "Major");
+      },
+    },
+    highlightNote: {
+      type: Number,
+      default: () => {
+        return 1;
       },
     },
   },

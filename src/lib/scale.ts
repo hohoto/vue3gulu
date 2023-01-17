@@ -14,8 +14,6 @@ export class Scale {
     getScaleNotes() {
       if(SharpKeys[this.name].indexOf(this.key)>=0){
         const sharpNotes = this.alterRootNote(this.key,AllNotes["#Notes"])
-        console.log("degree",this.degree)
-        console.log("sharpNotes",sharpNotes)
         return sharpNotes.filter(x=>this.degree.indexOf(sharpNotes.indexOf(x))>=0)
       }else{
         const flatNotes = this.alterRootNote(this.key,AllNotes["bNotes"])
@@ -27,7 +25,6 @@ export class Scale {
       if (keyIndex<0) {
         return notesArray
       }
-      console.log("alterNotes",notesArray.slice(keyIndex).concat(notesArray.slice(0,keyIndex)))
       return notesArray.slice(keyIndex).concat(notesArray.slice(0,keyIndex))
     }
  }

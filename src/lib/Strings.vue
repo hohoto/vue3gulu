@@ -7,7 +7,12 @@
       <span class="noteFret fret0">
         <span
           class="note"
-          :class="confirmScaleNote(openNote, 0) ? '' : 'not_current_scale'"
+          :class="[
+            confirmScaleNote(openNote, 0) ? '' : 'not_current_scale',
+            confirmHighlightNote(openNote, 0, highlightNoteLevel)
+              ? 'highlight_note'
+              : '',
+          ]"
         >
           {{ openNote }}
         </span>
@@ -26,7 +31,15 @@
         ><span class="dot"> </span
       ></span>
       <span v-if="confirmScaleNote(openNote, curFret)" class="noteFret"
-        ><span class="note">{{ getScaleNote(openNote, curFret) }} </span></span
+        ><span
+          class="note"
+          :class="
+            confirmHighlightNote(openNote, curFret, highlightNoteLevel)
+              ? 'highlight_note'
+              : ''
+          "
+          >{{ getScaleNote(openNote, curFret) }}
+        </span></span
       >
     </span>
   </div>
@@ -64,6 +77,12 @@ export default {
         return 3;
       },
     },
+    highlightNoteLevel: {
+      type: Number,
+      default: () => {
+        return 1;
+      },
+    },
   },
   setup(props, context) {
     const confirmScaleNote = (openNote: string, fret: number) => {
@@ -86,9 +105,26 @@ export default {
 
       return curNote;
     };
+    const confirmHighlightNote = (
+      openNote: string,
+      fret: number,
+      highlightNoteLevel: number
+    ) => {
+      const curNotes = AllNotes[props.isSharp ? "#Notes" : "bNotes"];
+      const notesLength = curNotes.length;
+      const curNote =
+        curNotes[
+          (curNotes.indexOf(openNote) + fret + notesLength) % notesLength
+        ];
+      if (props.scaleNotes.indexOf(curNote) === highlightNoteLevel - 1) {
+        return true;
+      }
+      return false;
+    };
     return {
       confirmScaleNote,
       getScaleNote,
+      confirmHighlightNote,
     };
   },
 };
@@ -150,6 +186,9 @@ $noteWidth: 15px;
         }
         &:hover {
           box-shadow: 0px 0px 3px #333;
+        }
+        &.highlight_note {
+          background-color: lightseagreen;
         }
       }
     }

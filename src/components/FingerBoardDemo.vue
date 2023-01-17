@@ -38,6 +38,18 @@ export default {
         description: "(scaleKey, scaleName)",
         defaultValue: 'new Scale("C", "Major")',
       },
+      {
+        param: "highlightNoteLevel",
+        type: "Number",
+        description: "the highlighted level of note",
+        defaultValue: 1,
+      },
+      {
+        param: "dotFrets",
+        type: "Array",
+        description: "array of frets which have dots",
+        defaultValue: "[3, 5, 7, 9, 12, 15, 17, 19]",
+      },
     ];
     const instrument = new Instrument("Guitar", 6, 20, [
       "E",
