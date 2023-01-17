@@ -102,8 +102,8 @@ export default {
       new Instrument("Guitar", 6, 20, ["E", "B", "G", "D", "A", "E"])
     );
     const scale = ref(new Scale("F#", "Major"));
-    let curInstrument = ref("Guitar");
-    let curString = ref(6);
+    const curInstrument = ref("Guitar");
+    const curString = ref(6);
     const InstrumentOptions = ref(
       instrumentTitleLib.map((x) => {
         return {
@@ -113,7 +113,7 @@ export default {
         };
       })
     );
-    let stringsOptions = ref(
+    const stringsOptions = ref(
       stringsLib[curInstrument.value].map((x) => {
         return {
           value: x,
@@ -135,6 +135,7 @@ export default {
       }
       instrument.value.setName(curInstrument.value);
       instrument.value.setStrings(curString.value);
+      instrument.value.setOpenNotes();
       console.log("changeInstrument", stringsOptions.value);
     };
     return {

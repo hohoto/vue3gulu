@@ -1,3 +1,5 @@
+import {openNoteLib} from './instrumentLib'
+
 export class Instrument {
     name: string;
     strings: number;
@@ -14,5 +16,14 @@ export class Instrument {
     }
     setStrings(strings: number) {
       this.strings = strings 
+    }
+    setOpenNotes() {
+      let openNotes = this.openNotes
+      if (this.name === 'Guitar') {
+        openNotes = openNoteLib[this.name].slice(0,this.strings)
+      } else if (this.name === 'Bass') {
+        openNotes = openNoteLib[this.name+this.strings]
+      }
+      this.openNotes = openNotes 
     }
   }
