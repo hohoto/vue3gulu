@@ -54,6 +54,10 @@ export default {
   },
   setup(props) {
     const getScaleNotes = () => {
+      console.log(
+        reactive(props.scaleProps),
+        reactive(props.scaleProps).getScaleNotes()
+      );
       return reactive(props.scaleProps).getScaleNotes();
     };
     return { getScaleNotes };

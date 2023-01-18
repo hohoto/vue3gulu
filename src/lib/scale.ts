@@ -23,7 +23,7 @@ export class Scale {
     alterRootNote(key: string,notesArray: any[]){
       const keyIndex = notesArray.indexOf(key)
       if (keyIndex<0) {
-        return notesArray
+        return []
       }
       return notesArray.slice(keyIndex).concat(notesArray.slice(0,keyIndex))
     }
@@ -34,6 +34,7 @@ export class Scale {
       this.key = key;
     }
     setDegree() {
+      this.isSharp = sharpKeys[this.name].indexOf(this.key)>=0
       this.degree = scaleMap[this.name];
     }
  }
