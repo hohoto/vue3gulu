@@ -23,6 +23,7 @@
 import Strings from "./Strings.vue";
 import { Scale } from "./scale";
 import { Instrument } from "./instrument";
+import { reactive } from "@vue/reactivity";
 export default {
   components: { Strings },
   props: {
@@ -51,14 +52,9 @@ export default {
       },
     },
   },
-  method: {
-    getScaleNotes: () => {
-      return true;
-    },
-  },
   setup(props) {
     const getScaleNotes = () => {
-      return props.scaleProps.getScaleNotes();
+      return reactive(props.scaleProps).getScaleNotes();
     };
     return { getScaleNotes };
   },

@@ -1,4 +1,4 @@
-import {ScaleMap,SharpKeys,AllNotes} from "./scaleLib"
+import {scaleMap,sharpKeys,allNotes} from "./scaleLib"
 
 export class Scale {
     name: string;
@@ -8,15 +8,15 @@ export class Scale {
     constructor(key: string, name: string) {
       this.name = name;
       this.key = key;
-      this.degree = ScaleMap[name];
-      this.isSharp = SharpKeys[name].indexOf(key)>=0
+      this.degree = scaleMap[name];
+      this.isSharp = sharpKeys[name].indexOf(key)>=0
     }
     getScaleNotes() {
-      if(SharpKeys[this.name].indexOf(this.key)>=0){
-        const sharpNotes = this.alterRootNote(this.key,AllNotes["#Notes"])
+      if(sharpKeys[this.name].indexOf(this.key)>=0){
+        const sharpNotes = this.alterRootNote(this.key,allNotes["#Notes"])
         return sharpNotes.filter(x=>this.degree.indexOf(sharpNotes.indexOf(x))>=0)
       }else{
-        const flatNotes = this.alterRootNote(this.key,AllNotes["bNotes"])
+        const flatNotes = this.alterRootNote(this.key,allNotes["bNotes"])
         return flatNotes.filter(x=>this.degree.indexOf(flatNotes.indexOf(x))>=0)
       }
     }
@@ -26,6 +26,15 @@ export class Scale {
         return notesArray
       }
       return notesArray.slice(keyIndex).concat(notesArray.slice(0,keyIndex))
+    }
+    setName(name: string) {
+      this.name = name;
+    }
+    setKey(key: string) {
+      this.key = key;
+    }
+    setDegree() {
+      this.degree = scaleMap[this.name];
     }
  }
 

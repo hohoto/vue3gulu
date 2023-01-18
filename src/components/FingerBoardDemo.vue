@@ -37,6 +37,39 @@
         </el-select>
       </span>
     </div>
+    <div class="select_area">
+      <span class="select_title"
+        ><span class="select_text">Key</span>
+        <el-select
+          v-model="curKey"
+          size="small"
+          placeholder="please select key"
+          @change="changeKey"
+        >
+          <el-option
+            v-for="item in keyOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+      </span>
+      <el-select
+        v-model="curKeyName"
+        size="small"
+        placeholder="please select keyName"
+        @change="changeKey"
+      >
+        <el-option
+          v-for="item in keyNameOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        >
+        </el-option>
+      </el-select>
+    </div>
     <FingerBoard :instrument="instrument" :scale-props="scale" />
     <div class="doucment_area">
       <div class="document_title">Document</div>
@@ -64,91 +97,102 @@
 <script lang="ts">
 import FingerBoard from "../lib/FingerBoard.vue";
 import { Scale } from "../lib/scale";
+import { scaleMap, allNotes } from "../lib/scaleLib";
 import { Instrument } from "../lib/instrument";
 import { instrumentTitleLib, stringsLib } from "../lib/instrumentLib";
 import { ref } from "vue";
 export default {
   components: { FingerBoard },
-  setup() {
-    const tableData = [
-      {
-        param: "instrument",
-        type: "Instrument",
-        description:
-          "(Instrument Name, number of strings, number of frets, open string notes)",
-        defaultValue:
-          'new Instrument("Guitar", 6, 20, ["E", "B", "G", "D", "A", "E"])',
-      },
-      {
-        param: "scaleProps",
-        type: "Scale",
-        description: "(scaleKey, scaleName)",
-        defaultValue: 'new Scale("C", "Major")',
-      },
-      {
-        param: "highlightNoteLevel",
-        type: "Number",
-        description: "the highlighted level of note",
-        defaultValue: 1,
-      },
-      {
-        param: "dotFrets",
-        type: "Array",
-        description: "array of frets which have dots",
-        defaultValue: "[3, 5, 7, 9, 12, 15, 17, 19]",
-      },
-    ];
-    const instrument = ref(
-      new Instrument("Guitar", 6, 20, ["E", "B", "G", "D", "A", "E"])
-    );
-    const scale = ref(new Scale("F#", "Major"));
-    const curInstrument = ref("Guitar");
-    const curString = ref(6);
-    const InstrumentOptions = ref(
-      instrumentTitleLib.map((x) => {
-        return {
-          value: x,
-          label: x,
-          key: x,
-        };
-      })
-    );
-    const stringsOptions = ref(
-      stringsLib[curInstrument.value].map((x) => {
-        return {
-          value: x,
-          label: x,
-          key: x,
-        };
-      })
-    );
-    const changeInstrument = (changeOtions: Boolean) => {
-      if (changeOtions) {
-        stringsOptions.value = stringsLib[curInstrument.value].map((x) => {
-          return {
-            value: x,
-            label: x,
-            key: x,
-          };
-        });
-        curString.value = 6;
-      }
-      instrument.value.setName(curInstrument.value);
-      instrument.value.setStrings(curString.value);
-      instrument.value.setOpenNotes();
-      console.log("changeInstrument", stringsOptions.value);
-    };
-    return {
-      tableData,
-      instrument,
-      scale,
-      InstrumentOptions,
-      stringsOptions,
-      curInstrument,
-      curString,
-      changeInstrument,
-    };
+};
+</script>
+<script lang="ts" setup>
+const curKey = ref("C");
+const curKeyName = ref("Major");
+const keyOptions = allNotes.allNotes.map((x) => {
+  return {
+    value: x,
+    label: x,
+    key: x,
+  };
+});
+const keyNameOptions = Object.keys(scaleMap).map((x) => {
+  return {
+    value: x,
+    label: x,
+    key: x,
+  };
+});
+const tableData = [
+  {
+    param: "instrument",
+    type: "Instrument",
+    description:
+      "(Instrument Name, number of strings, number of frets, open string notes)",
+    defaultValue:
+      'new Instrument("Guitar", 6, 20, ["E", "B", "G", "D", "A", "E"])',
   },
+  {
+    param: "scaleProps",
+    type: "Scale",
+    description: "(scaleKey, scaleName)",
+    defaultValue: 'new Scale("C", "Major")',
+  },
+  {
+    param: "highlightNoteLevel",
+    type: "Number",
+    description: "the highlighted level of note",
+    defaultValue: 1,
+  },
+  {
+    param: "dotFrets",
+    type: "Array",
+    description: "array of frets which have dots",
+    defaultValue: "[3, 5, 7, 9, 12, 15, 17, 19]",
+  },
+];
+const instrument = ref(
+  new Instrument("Guitar", 6, 20, ["E", "B", "G", "D", "A", "E"])
+);
+const scale = ref(new Scale("C", "Major"));
+const curInstrument = ref("Guitar");
+const curString = ref(6);
+const InstrumentOptions = ref(
+  instrumentTitleLib.map((x) => {
+    return {
+      value: x,
+      label: x,
+      key: x,
+    };
+  })
+);
+const stringsOptions = ref(
+  stringsLib[curInstrument.value].map((x) => {
+    return {
+      value: x,
+      label: x,
+      key: x,
+    };
+  })
+);
+const changeInstrument = (changeOtions: Boolean) => {
+  if (changeOtions) {
+    stringsOptions.value = stringsLib[curInstrument.value].map((x) => {
+      return {
+        value: x,
+        label: x,
+        key: x,
+      };
+    });
+    curString.value = 6;
+  }
+  instrument.value.setName(curInstrument.value);
+  instrument.value.setStrings(curString.value);
+  instrument.value.setOpenNotes();
+};
+const changeKey = () => {
+  scale.value.setKey(curKey.value);
+  scale.value.setName(curKeyName.value);
+  scale.value.setDegree();
 };
 </script>
 <style lang="scss">

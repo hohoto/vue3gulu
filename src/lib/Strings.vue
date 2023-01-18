@@ -46,7 +46,7 @@
 </template>
 
 <script lang="ts">
-import { AllNotes } from "./scaleLib";
+import { allNotes } from "./scaleLib";
 export default {
   props: {
     stringNo: Number,
@@ -86,7 +86,7 @@ export default {
   },
   setup(props, context) {
     const confirmScaleNote = (openNote: string, fret: number) => {
-      const curNotes = AllNotes[props.isSharp ? "#Notes" : "bNotes"];
+      const curNotes = allNotes[props.isSharp ? "#Notes" : "bNotes"];
       const notesLength = curNotes.length;
       const curNote =
         curNotes[
@@ -96,7 +96,7 @@ export default {
       return props.scaleNotes.indexOf(curNote) >= 0;
     };
     const getScaleNote = (openNote: string, fret: number) => {
-      const curNotes = AllNotes[props.isSharp ? "#Notes" : "bNotes"];
+      const curNotes = allNotes[props.isSharp ? "#Notes" : "bNotes"];
       const notesLength = curNotes.length;
       const curNote =
         curNotes[
@@ -110,7 +110,7 @@ export default {
       fret: number,
       highlightNoteLevel: number
     ) => {
-      const curNotes = AllNotes[props.isSharp ? "#Notes" : "bNotes"];
+      const curNotes = allNotes[props.isSharp ? "#Notes" : "bNotes"];
       const notesLength = curNotes.length;
       const curNote =
         curNotes[
