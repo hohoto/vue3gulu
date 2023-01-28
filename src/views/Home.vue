@@ -28,12 +28,14 @@ export default {
   color: black;
   background: url(../assets/images/BocchiBackgroudHome.jpg) no-repeat;
   background-size: 100%;
+  min-height: 100vh;
+  color: limegreen;
   > .actions {
     padding: 8px 0;
     a {
       margin: 0 8px;
-      color: black;
-      background: #fff;
+      color: limegreen;
+      background: papayawhip;
       display: inline-block;
       $h: 28px;
       height: $h;
