@@ -163,6 +163,12 @@ const tableData = [
     description: "array of frets which have dots",
     defaultValue: "[3, 5, 7, 9, 12, 15, 17, 19]",
   },
+  {
+    param: "specialTuned",
+    type: "Boolean",
+    description: "whether you want to specially tune your instrument",
+    defaultValue: "false",
+  },
 ];
 const instrument = ref(
   new Instrument("Guitar", 6, 20, ["E", "B", "G", "D", "A", "E"])
