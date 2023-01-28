@@ -14,8 +14,10 @@
       :dot-string="Math.ceil(instrument.strings / 2)"
       :is-sharp="scaleProps.isSharp"
       :scale-notes="getScaleNotes()"
+      :cur-all-notes="getAllNotes()"
       :highlight-note="highlightNoteLevel"
       :dot-frets="dotFrets"
+      :special-tuned="specialTuned"
     />
   </div>
 </template>
@@ -39,6 +41,10 @@ export default {
         return new Scale("C", "Major");
       },
     },
+    specialTuned: {
+      type: Boolean,
+      default: false,
+    },
     highlightNoteLevel: {
       type: Number,
       default: () => {
@@ -54,13 +60,12 @@ export default {
   },
   setup(props) {
     const getScaleNotes = () => {
-      console.log(
-        reactive(props.scaleProps),
-        reactive(props.scaleProps).getScaleNotes()
-      );
       return reactive(props.scaleProps).getScaleNotes();
     };
-    return { getScaleNotes };
+    const getAllNotes = () => {
+      return reactive(props.scaleProps).getAllNotes();
+    };
+    return { getScaleNotes, getAllNotes };
   },
 };
 </script>

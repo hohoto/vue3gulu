@@ -70,7 +70,15 @@
         </el-option>
       </el-select>
     </div>
-    <FingerBoard :instrument="instrument" :scale-props="scale" />
+    <div class="select_area">
+      <span class="select_text">specialTuned</span>
+      <el-switch v-model="specialTuned" />
+    </div>
+    <FingerBoard
+      :instrument="instrument"
+      :special-tuned="specialTuned"
+      :scale-props="scale"
+    />
     <div class="doucment_area">
       <div class="document_title">Document</div>
       <div class="document_text">
@@ -106,6 +114,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
+const specialTuned = ref(false);
 const curKey = ref("C");
 const curKeyName = ref("Major");
 const keyOptions = allNotes.allNotes.map((x) => {
@@ -203,9 +212,9 @@ const changeKey = () => {
   margin-bottom: 20px;
   .select_title {
     margin: 10px 10px 10px 0;
-    .select_text {
-      margin-right: 10px;
-    }
+  }
+  .select_text {
+    margin-right: 10px;
   }
 }
 .doucment_area {

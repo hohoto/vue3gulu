@@ -12,12 +12,14 @@ export class Scale {
       this.isSharp = sharpKeys[name].indexOf(key)>=0
     }
     getScaleNotes() {
+      const sharpNotes = this.getAllNotes()
+      return sharpNotes.filter(x=>this.degree.indexOf(sharpNotes.indexOf(x))>=0)
+    }
+    getAllNotes() {
       if(sharpKeys[this.name].indexOf(this.key)>=0){
-        const sharpNotes = this.alterRootNote(this.key,allNotes["#Notes"])
-        return sharpNotes.filter(x=>this.degree.indexOf(sharpNotes.indexOf(x))>=0)
+        return this.alterRootNote(this.key,allNotes["#Notes"])
       }else{
-        const flatNotes = this.alterRootNote(this.key,allNotes["bNotes"])
-        return flatNotes.filter(x=>this.degree.indexOf(flatNotes.indexOf(x))>=0)
+        return this.alterRootNote(this.key,allNotes["bNotes"])
       }
     }
     alterRootNote(key: string,notesArray: any[]){

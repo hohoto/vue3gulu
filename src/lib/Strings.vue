@@ -3,6 +3,20 @@
     class="strings"
     :class="['strings' + stringNo, isLastString ? 'last_string' : '']"
   >
+    <span v-show="specialTuned">
+      <el-select
+        v-model="openNote"
+        class="special_tuned"
+        placeholder="Select openNote"
+        size="small"
+      >
+        <el-option
+          v-for="item in curAllNotes"
+          :key="item"
+          :label="item"
+          :value="item"
+        /> </el-select
+    ></span>
     <span class="fret">
       <span class="noteFret fret0">
         <span
@@ -58,8 +72,18 @@ export default {
         return "E";
       },
     },
+    specialTuned: {
+      type: Boolean,
+      default: false,
+    },
     isSharp: Boolean,
     scaleNotes: {
+      type: Array,
+      default: () => {
+        return [];
+      },
+    },
+    curAllNotes: {
       type: Array,
       default: () => {
         return [];
@@ -136,9 +160,11 @@ $dotHeight: 13px;
 $dotWidth: 13px;
 $noteHeight: 15px;
 $noteWidth: 15px;
+$borderHeight: 3px;
+$borderWidth: 1px;
 
 .strings {
-  height: 25px;
+  height: $fretHeight;
   background-color: white;
   display: flex;
   justify-content: start;
@@ -146,9 +172,9 @@ $noteWidth: 15px;
   min-width: 800px;
   .fret {
     height: $fretHeight;
-    border-top: solid 3px #888;
+    border-top: solid $borderHeight #888;
     flex-basis: $fretWidth;
-    border-right: solid 1px #888;
+    border-right: solid $borderWidth #888;
     display: flex;
     position: relative;
     .dotFret {
@@ -166,7 +192,7 @@ $noteWidth: 15px;
       }
     }
     &.fret1 {
-      border-left: solid 2px #888;
+      border-left: solid $borderWidth * 2 #888;
     }
     .noteFret {
       display: flex;
@@ -198,6 +224,11 @@ $noteWidth: 15px;
       border-left: none;
       border-right: none;
     }
+  }
+  .special_tuned {
+    margin: -1rem auto 0 auto;
+    height: $borderHeight + $fretHeight;
+    width: 4rem;
   }
 }
 </style>
