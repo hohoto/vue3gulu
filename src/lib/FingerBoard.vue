@@ -10,7 +10,7 @@
       :string-no="curString"
       :frets="instrument.frets"
       :is-last-string="!!(curString === instrument.strings)"
-      :open-note="instrument.openNotes[curString - 1]"
+      :open-note="getCurOpenNote(curString - 1)"
       :dot-string="Math.ceil(instrument.strings / 2)"
       :is-sharp="scaleProps.isSharp"
       :scale-notes="getScaleNotes()"
@@ -24,8 +24,9 @@
 <script lang="ts">
 import Strings from "./Strings.vue";
 import { Scale } from "./scale";
+import { confirmIfAlterNote } from "./scaleLib";
 import { Instrument } from "./instrument";
-import { reactive } from "@vue/reactivity";
+import { reactive, toRaw } from "@vue/reactivity";
 export default {
   components: { Strings },
   props: {
@@ -62,10 +63,22 @@ export default {
     const getScaleNotes = () => {
       return reactive(props.scaleProps).getScaleNotes();
     };
+    const getCurOpenNote = (curString: number) => {
+      const scaleNotes = getScaleNotes();
+      const openNotesArr = reactive(props.instrument).openNotes.map((x) =>
+        confirmIfAlterNote(x, reactive(props.scaleProps).isSharp)
+      );
+      console.log(
+        toRaw(reactive(props.instrument).openNotes),
+        openNotesArr[curString],
+        reactive(props.scaleProps).isSharp
+      );
+      return openNotesArr[curString];
+    };
     const getAllNotes = () => {
       return reactive(props.scaleProps).getAllNotes();
     };
-    return { getScaleNotes, getAllNotes };
+    return { getScaleNotes, getCurOpenNote, getAllNotes };
   },
 };
 </script>
