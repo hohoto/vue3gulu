@@ -99,6 +99,11 @@
           </el-table-column>
         </el-table>
       </div>
+      <div class="document_text">
+        If you want to add an instrument or a scale. You can maintain your own
+        config in instrumentLib.ts and scaleLib.ts. When you want to modify some
+        special rules, you can alse maintain instrument.ts and scale.ts.
+      </div>
     </div>
   </div>
 </template>
