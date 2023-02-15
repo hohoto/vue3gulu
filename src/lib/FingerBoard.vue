@@ -68,11 +68,6 @@ export default {
       const openNotesArr = reactive(props.instrument).openNotes.map((x) =>
         confirmIfAlterNote(x, reactive(props.scaleProps).isSharp)
       );
-      console.log(
-        toRaw(reactive(props.instrument).openNotes),
-        openNotesArr[curString],
-        reactive(props.scaleProps).isSharp
-      );
       return openNotesArr[curString];
     };
     const getAllNotes = () => {

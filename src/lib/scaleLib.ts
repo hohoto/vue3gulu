@@ -26,7 +26,6 @@ export const sameNote = {
   'bB':'A#',
 }
 export function confirmIfAlterNote(note:string,isSharp:boolean){
-  console.log(note,isSharp)
   if ((allNotes["#Notes"].indexOf(note)>-1 && isSharp)||(allNotes["bNotes"].indexOf(note)>-1 && !isSharp)) {
     return note;
   } else {
