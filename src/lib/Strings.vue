@@ -182,8 +182,8 @@ $borderWidth: 1px;
       justify-content: center;
       align-items: center;
       position: absolute;
-      left: ($fretWidth - $dotWidth)/2;
-      top: ($fretHeight - $dotHeight)/2;
+      left: calc(($fretWidth - $dotWidth) / 2);
+      top: calc(($fretHeight - $dotHeight) / 2);
       .dot {
         background-color: #888;
         border-radius: 13px;

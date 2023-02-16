@@ -1,0 +1,1 @@
+export {default as FingerBoard} from './FingerBoard.vue';
