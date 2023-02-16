@@ -1,12 +1,12 @@
 {
-  "name": "gululu1",
-  "version": "0.0.1",
+  "name": "bandHeroLib",
+  "version": "0.0.0",
   "files": [
     "dist/lib/*"
   ],
   "type": "module",
-  "main": "dist/lib/gulu.js",
-  "module": "dist/lib/gulu.esm.js",
+  "main": "dist/lib/index.js",
+  "module": "dist/lib/index.esm.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build"
