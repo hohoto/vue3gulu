@@ -1,1 +1,11 @@
 export {default as FingerBoard} from './FingerBoard.vue';
+export {Scale as Scale} from './scale.ts';
+export {scaleMap as scaleMap} from './scaleLib.ts';
+export {allNotes as allNotes} from './scaleLib.ts';
+export {sharpKeys as sharpKeys} from './scaleLib.ts';
+export {sameNote as sameNote} from './scaleLib.ts';
+export {confirmIfAlterNote as confirmIfAlterNote} from './scaleLib.ts';
+export {Instrument as Instrument} from './instrument.ts';
+export {instrumentTitleLib as instrumentTitleLib} from './instrumentLib.ts';
+export {stringsLib as stringsLib} from './instrumentLib.ts';
+export {openNoteLib as openNoteLib} from './instrumentLib.ts';
